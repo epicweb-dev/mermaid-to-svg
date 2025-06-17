@@ -4,11 +4,15 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "browser-worker",
+	"name": "mermaid-to-svg",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-06-17",
+	"compatibility_flags": ["nodejs_compat"],
 	"observability": {
 		"enabled": true
+	},
+	"browser": {
+		"binding": "BROWSER"
 	}
 	/**
 	 * Smart Placement

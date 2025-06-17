@@ -1,5 +1,5 @@
 {
-	"name": "browser-worker",
+	"name": "mermaid-to-svg",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
@@ -10,7 +10,9 @@
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
+		"@cloudflare/puppeteer": "^1.0.2",
 		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"lz-string": "^1.5.0",
 		"typescript": "^5.5.2",
 		"vitest": "~3.2.0",
 		"wrangler": "^4.20.0"
