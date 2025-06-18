@@ -47,19 +47,25 @@ export default {
 		let response = await cache.match(request.url);
 		if (response) return response;
 
+		const theme = url.searchParams.get('theme') === 'dark' ? 'dark' : 'default';
+
 		let svg: string | undefined;
 		try {
 			const browser = await puppeteer.launch(env.BROWSER);
 			const page = await browser.newPage();
 			await page.goto('about:blank');
 			await page.addScriptTag({ url: MERMAID_CDN });
-			svg = await page.evaluate(async (mermaidString) => {
-				// @ts-ignore
-				await window.mermaid.initialize({ startOnLoad: false });
-				// @ts-ignore
-				const { svg } = await window.mermaid.render('mermaid-svg', mermaidString);
-				return svg;
-			}, mermaidString);
+			svg = await page.evaluate(
+				async (mermaidString, theme) => {
+					// @ts-ignore
+					await window.mermaid.initialize({ startOnLoad: false, theme });
+					// @ts-ignore
+					const { svg } = await window.mermaid.render(`ms-${Math.random().toString(16).slice(2)}`, mermaidString);
+					return svg;
+				},
+				mermaidString,
+				theme
+			);
 			await browser.close();
 		} catch (err: any) {
 			console.error('Error during browser rendering:', err && (err.stack || err.message || err));
