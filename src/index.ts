@@ -47,11 +47,11 @@ export default {
 		let response = await cache.match(request.url);
 		
 		if (response) {
-			console.log('CACHE HIT');
+			console.log(`CACHE HIT - ${url.searchParams.get('theme') || 'default'} theme`);
 			return response;
 		}
 
-		console.log('CACHE MISS - rendering SVG');
+		console.log(`CACHE MISS - ${url.searchParams.get('theme') || 'default'} theme, diagram: ${mermaidString.substring(0, 50)}${mermaidString.length > 50 ? '...' : ''}`);
 
 		const theme = url.searchParams.get('theme') === 'dark' ? 'dark' : 'default';
 
