@@ -47,7 +47,7 @@ export default {
 		let response = await cache.match(request.url);
 		
 		if (response) {
-			console.log(`CACHE HIT - ${url.searchParams.get('theme') || 'default'} theme`);
+			console.log(`CACHE HIT - ${url.searchParams.get('theme') || 'default'} theme, diagram: ${mermaidString.substring(0, 50)}${mermaidString.length > 50 ? '...' : ''}`);
 			return response;
 		}
 
