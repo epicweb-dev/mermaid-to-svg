@@ -45,7 +45,13 @@ export default {
 
 		const cache = caches.default;
 		let response = await cache.match(request.url);
-		if (response) return response;
+		
+		if (response) {
+			console.log(`CACHE HIT - ${url.searchParams.get('theme') || 'default'} theme, diagram: ${mermaidString.substring(0, 50)}${mermaidString.length > 50 ? '...' : ''}`);
+			return response;
+		}
+
+		console.log(`CACHE MISS - ${url.searchParams.get('theme') || 'default'} theme, diagram: ${mermaidString.substring(0, 50)}${mermaidString.length > 50 ? '...' : ''}`);
 
 		const theme = url.searchParams.get('theme') === 'dark' ? 'dark' : 'default';
 
